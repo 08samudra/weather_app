@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_clone2/03-05_test2.dart';
+import 'package:flutter_clone2/Service/pref_handler.dart';
 
 class testfigma extends StatefulWidget {
   const testfigma({super.key});
@@ -87,6 +88,7 @@ class _testfigmaState extends State<testfigma> {
                   ),
                 ),
                 onPressed: () {
+                  PreferenceHandler.saveId('1');
                   Navigator.of(
                     context,
                   ).push(MaterialPageRoute(builder: (context) => test2()));
