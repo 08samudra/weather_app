@@ -1,18 +1,22 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_clone2/03-03_login.dart';
-import 'package:flutter_clone2/02-28_login2.dart';
+// import 'package:flutter_clone2/02-28_login2.dart';
 import 'package:flutter_clone2/03-03_parsing_TabBar1.dart';
+import 'package:flutter_clone2/03-04_test.dart';
+import 'package:flutter_clone2/Service/pref_handler.dart';
 
 class LoginScreen extends StatefulWidget {
-  const LoginScreen({super.key});
+  const LoginScreen({super.key, required this.email, required this.phone});
+  final String email;
+  final String phone;
 
   @override
   State<LoginScreen> createState() => _LoginScreenState();
 }
 
-void main() {
-  runApp(const MyApp());
-}
+// void main() {
+//   runApp(const MyApp());
+// }
 
 class MyApp extends StatelessWidget {
   const MyApp({super.key});
@@ -22,7 +26,7 @@ class MyApp extends StatelessWidget {
     return MaterialApp(
       title: 'Flutter Demo',
       theme: ThemeData(primarySwatch: Colors.grey),
-      home: const LoginScreen(),
+      home: const LoginScreen(email: "", phone: ""),
     );
   }
 }
@@ -31,9 +35,9 @@ class _LoginScreenState extends State<LoginScreen> {
   bool _isObsecure = false;
   bool _isActive = true;
   TextEditingController controllerData = TextEditingController();
-  // final TextEditingController _emailcontorller = TextEditingController();
-  // final TextEditingController _phonecontroller = TextEditingController();
-  // final TextEditingController_passwordcontroller = TextEditingController();
+  final TextEditingController _emailcontroller = TextEditingController();
+  final TextEditingController _phonecontroller = TextEditingController();
+  final TextEditingController_passwordcontroller = TextEditingController();
 
   @override
   Widget build(BuildContext context) {
@@ -58,7 +62,7 @@ class _LoginScreenState extends State<LoginScreen> {
                     Column(
                       children: [
                         Text(
-                          "Welcome To Facebook",
+                          "Welcome To Quiz",
                           style: TextStyle(
                             fontSize: 24,
                             fontWeight: FontWeight.bold,
@@ -113,11 +117,12 @@ class _LoginScreenState extends State<LoginScreen> {
                       onTap:
                           _isActive
                               ? () {
+                                PreferenceHandler.saveId("asd");
                                 Navigator.push(
                                   context,
                                   MaterialPageRoute(
                                     builder:
-                                        (context) => LoginScreen2(
+                                        (context) => testfigma(
                                           data: controllerData.text,
                                         ),
                                   ),
@@ -164,8 +169,10 @@ class _LoginScreenState extends State<LoginScreen> {
                                       parsing1(data: controllerData.text),
                             ),
                           );
+
+                          PreferenceHandler.removeId();
                         },
-                        child: const Text('Mengirim Data'),
+                        child: const Text('Reset'),
                       ),
                     ],
                   ),

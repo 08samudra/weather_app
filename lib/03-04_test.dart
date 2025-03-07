@@ -3,7 +3,8 @@ import 'package:flutter_clone2/03-05_test2.dart';
 import 'package:flutter_clone2/Service/pref_handler.dart';
 
 class testfigma extends StatefulWidget {
-  const testfigma({super.key});
+  const testfigma({super.key, required this.data});
+  final String data;
 
   @override
   _testfigmaState createState() => _testfigmaState();

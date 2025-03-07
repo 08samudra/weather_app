@@ -1,22 +1,25 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_clone2/02-28_login1.dart';
 import 'package:flutter_clone2/03-04_test.dart';
 import 'package:flutter_clone2/03-06_item.dart';
 // import 'package:flutter_clone2/next_screen.dart'; // Ganti dengan halaman tujuan
 
 // void main() => runApp(MyApp06());
 
-// class MyApp06 extends StatelessWidget {
-//   @override
-//   Widget build(BuildContext context) {
-//     return MaterialApp(
-//       debugShowCheckedModeBanner: false,
-//       title: 'Welcome Screen',
-//       home: WelcomeScreen(),
-//     );
-//   }
-// }
+class MyApp06 extends StatelessWidget {
+  @override
+  Widget build(BuildContext context) {
+    return MaterialApp(
+      debugShowCheckedModeBanner: false,
+      title: 'Welcome Screen',
+      home: WelcomeScreen(),
+    );
+  }
+}
+
 class splash1 extends StatefulWidget {
-  const splash1({super.key});
+  const splash1({super.key, required this.data});
+  final String data;
 
   @override
   State<splash1> createState() => _splash1State();
@@ -43,7 +46,7 @@ class _WelcomeScreenState extends State<WelcomeScreen> {
     super.initState();
     _pageViewController.addListener(() {
       setState(() {
-        currentPage = _pageViewController.page ?? 0.0;
+        currentPage = _pageViewController.page ?? 0.1;
       });
     });
   }
@@ -97,7 +100,7 @@ class _WelcomeScreenState extends State<WelcomeScreen> {
                             Text(
                               items[index]['header'],
                               style: TextStyle(
-                                fontSize: 50.0,
+                                fontSize: 40.0,
                                 fontWeight: FontWeight.w300,
                                 color: Color(0XFF3F3D56),
                                 height: 2.0,
@@ -128,7 +131,11 @@ class _WelcomeScreenState extends State<WelcomeScreen> {
                                     Navigator.push(
                                       context,
                                       MaterialPageRoute(
-                                        builder: (context) => testfigma(),
+                                        builder:
+                                            (context) => LoginScreen(
+                                              email: "",
+                                              phone: "",
+                                            ),
                                       ),
                                     );
                                   },

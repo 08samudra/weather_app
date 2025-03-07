@@ -1,5 +1,6 @@
 import 'package:shared_preferences/shared_preferences.dart';
 
+// 06-03-2025
 class PreferenceHandler {
   static const String _id = 'idUser';
 
