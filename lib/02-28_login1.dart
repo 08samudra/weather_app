@@ -35,8 +35,8 @@ class _LoginScreenState extends State<LoginScreen> {
   bool _isObsecure = false;
   bool _isActive = true;
   TextEditingController controllerData = TextEditingController();
-  final TextEditingController _emailcontroller = TextEditingController();
-  final TextEditingController _phonecontroller = TextEditingController();
+  // final TextEditingController _emailcontroller = TextEditingController();
+  // final TextEditingController _phonecontroller = TextEditingController();
   final TextEditingController_passwordcontroller = TextEditingController();
 
   @override
