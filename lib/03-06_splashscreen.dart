@@ -100,7 +100,7 @@ class _WelcomeScreenState extends State<WelcomeScreen> {
                             Text(
                               items[index]['header'],
                               style: TextStyle(
-                                fontSize: 40.0,
+                                fontSize: 34.0,
                                 fontWeight: FontWeight.w300,
                                 color: Color(0XFF3F3D56),
                                 height: 2.0,

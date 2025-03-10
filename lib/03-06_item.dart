@@ -18,15 +18,15 @@ List items = [
     "image": "assets/images/1.png",
   },
   {
-    "header": "Invest",
+    "header": "Collect Scores",
     "description":
-        "Online chat which provides its users maximum functionality to simplify the search",
+        "Semakin banyak jawaban benar, semakin tinggi skor yang kamu dapatkan.",
     "image": "assets/images/5.png",
   },
   {
-    "header": "Travel",
+    "header": "Be a Champion",
     "description":
-        "Online chat which provides its users maximum functionality to simplify the search",
+        "Raih peringkat tertinggi dan buktikan bahwa kamu adalah yang terbaik dalam kuis ini!",
     "image": "assets/images/4.png",
   },
 ];
