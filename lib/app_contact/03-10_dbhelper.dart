@@ -1,6 +1,6 @@
 import 'dart:async';
 
-import 'package:flutter_clone2/03-10_home.dart';
+import 'package:flutter_clone2/app_contact/03-10_home.dart';
 import 'package:sqflite/sqflite.dart';
 
 const String contactTable = 'contactTable';

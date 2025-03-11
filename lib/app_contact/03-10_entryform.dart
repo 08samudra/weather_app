@@ -5,7 +5,7 @@ import 'package:flutter/services.dart';
 import 'package:flutter/widgets.dart';
 import 'package:image_picker/image_picker.dart';
 
-import 'package:flutter_clone2/03-10_dbhelper.dart';
+import 'package:flutter_clone2/app_contact/03-10_dbhelper.dart';
 import 'package:intl_phone_number_input/intl_phone_number_input.dart';
 
 class ContactPage extends StatefulWidget {
@@ -30,7 +30,7 @@ class _ContactPageState extends State<ContactPage> {
   bool isEditMode = false;
   String imagePicked = '';
   String initialCountry = 'NG';
-  PhoneNumber number = PhoneNumber(isoCode: 'BR');
+  PhoneNumber number = PhoneNumber(isoCode: 'ID');
 
   @override
   void initState() {

@@ -3,7 +3,7 @@ import 'dart:io';
 import 'package:flutter/material.dart';
 import 'package:url_launcher/url_launcher_string.dart';
 
-import 'package:flutter_clone2/03-10_dbhelper.dart';
+import 'package:flutter_clone2/app_contact/03-10_dbhelper.dart';
 
 import '03-10_entryform.dart';
 
