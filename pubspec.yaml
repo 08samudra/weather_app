@@ -32,15 +32,18 @@ dependencies:
   flutter:
     sdk: flutter
   sqflite: ^2.4.2
-  path_provider: any
+  path_provider: ^2.1.5
   image_picker: ^1.1.2
   intl_phone_number_input: ^0.7.4
   url_launcher: ^6.3.0
-  sweetalertv2: ^11.17.2
+  # sweetalertv2: ^11.17.2
   
   # The following adds the Cupertino Icons font to your application.
   # Use with the CupertinoIcons class for iOS style icons.
   cupertino_icons: ^1.0.8
+  # isar: ^3.1.0+1
+  # isar_flutter_libs: ^3.1.0+1
+  # provider: ^6.1.2
 
 dev_dependencies:
   flutter_test:
@@ -52,6 +55,8 @@ dev_dependencies:
   # package. See that file for information about deactivating specific lint
   # rules and activating additional ones.
   flutter_lints: ^5.0.0
+  # isar_generator: ^3.1.0+1
+  # build_runner: ^2.4.13
 
 # For information on the generic Dart part of this file, see the
 # following page: https://dart.dev/tools/pub/pubspec

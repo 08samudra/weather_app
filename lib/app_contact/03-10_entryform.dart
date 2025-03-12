@@ -29,7 +29,7 @@ class _ContactPageState extends State<ContactPage> {
 
   bool isEditMode = false;
   String imagePicked = '';
-  String initialCountry = 'NG';
+  String initialCountry = 'ID';
   PhoneNumber number = PhoneNumber(isoCode: 'ID');
 
   @override
