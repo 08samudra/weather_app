@@ -13,14 +13,23 @@ class WeatherHome extends StatefulWidget {
 class _WeatherHomeState extends State<WeatherHome> {
   late WeatherData weatherInfo;
   bool isLoading = false;
-  myWeather() {
-    isLoading = false;
-    WeatherServices().fetchWeather().then((value) {
+
+  Future<void> myWeather() async {
+    setState(() {
+      isLoading = false;
+    });
+    try {
+      WeatherData value = await WeatherServices().fetchWeather();
       setState(() {
         weatherInfo = value;
         isLoading = true;
       });
-    });
+    } catch (e) {
+      print("Error fetching weather: $e");
+      setState(() {
+        isLoading = true;
+      });
+    }
   }
 
   @override
@@ -42,28 +51,37 @@ class _WeatherHomeState extends State<WeatherHome> {
 
   @override
   Widget build(BuildContext context) {
-    String formattedDate = DateFormat(
-      'EEEE d MMMM yyyy',
-    ).format(DateTime.now());
+    String formattedDate = DateFormat('EEEE d MMMM').format(DateTime.now());
     String formattedTime = DateFormat('hh:mm a').format(DateTime.now());
     return Scaffold(
       backgroundColor: const Color.fromARGB(255, 35, 42, 240),
-      body: Padding(
-        padding: const EdgeInsets.all(15),
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: [
-            Center(
-              child:
-                  isLoading
-                      ? WeatherDetail(
-                        weather: weatherInfo,
-                        formattedDate: formattedDate,
-                        formattedTime: formattedTime,
-                      )
-                      : const CircularProgressIndicator(color: Colors.white),
+      body: RefreshIndicator(
+        onRefresh: () async {
+          await Future.delayed(const Duration(seconds: 2));
+          return myWeather();
+        },
+        child: SingleChildScrollView(
+          physics: const AlwaysScrollableScrollPhysics(),
+          child: Padding(
+            padding: const EdgeInsets.fromLTRB(15, 55, 15, 30),
+            child: Column(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                Center(
+                  child:
+                      isLoading
+                          ? WeatherDetail(
+                            weather: weatherInfo,
+                            formattedDate: formattedDate,
+                            formattedTime: formattedTime,
+                          )
+                          : const CircularProgressIndicator(
+                            color: Colors.white,
+                          ),
+                ),
+              ],
             ),
-          ],
+          ),
         ),
       ),
     );
@@ -150,7 +168,7 @@ class WeatherDetail extends StatelessWidget {
             borderRadius: BorderRadius.circular(20),
           ),
           child: Padding(
-            padding: const EdgeInsets.symmetric(vertical: 20, horizontal: 10),
+            padding: const EdgeInsets.symmetric(vertical: 30, horizontal: 10),
             child: Column(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
@@ -171,7 +189,7 @@ class WeatherDetail extends StatelessWidget {
                     Column(
                       mainAxisAlignment: MainAxisAlignment.center,
                       children: [
-                        const Icon(Icons.sunny, color: Colors.white),
+                        const Icon(Icons.trending_up, color: Colors.white),
                         const SizedBox(height: 5),
                         weatherInfoCard(
                           title: "Max",
@@ -183,7 +201,7 @@ class WeatherDetail extends StatelessWidget {
                     Column(
                       mainAxisAlignment: MainAxisAlignment.center,
                       children: [
-                        const Icon(Icons.wind_power, color: Colors.white),
+                        const Icon(Icons.trending_down, color: Colors.white),
                         const SizedBox(height: 5),
                         weatherInfoCard(
                           title: "Min",
