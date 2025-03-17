@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "753674526152",
+    "project_id": "samudra-firebase",
+    "storage_bucket": "samudra-firebase.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:753674526152:android:58db69de8e8900e78174fd",
+        "android_client_info": {
+          "package_name": "com.flutter.clone2"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDy5l815TiaGP-WrV1_E0yITNqI8AY_7JU"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
