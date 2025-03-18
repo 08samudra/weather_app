@@ -15,3 +15,6 @@ x86/
 *.[Cc]ache
 # but keep track of directories ending in .cache
 !*.[Cc]ache/
+
+#firbase_opstions
+firebase_options.dart
