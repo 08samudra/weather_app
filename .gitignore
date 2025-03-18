@@ -46,4 +46,4 @@ app.*.map.json
 
 
 #firebase_opstions hide
-firebase_opstions
+firebase_options.dart
