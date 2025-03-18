@@ -45,5 +45,5 @@ app.*.map.json
 /android/app/release
 
 
-#firebase_opstions.dart
-firebase_opstions.dart
+#firebase_opstions hide
+firebase_opstions
