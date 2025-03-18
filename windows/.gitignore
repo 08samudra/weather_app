@@ -17,4 +17,4 @@ x86/
 !*.[Cc]ache/
 
 #firbase_opstions
-firebase_options.dart
+lib/firebase_options.dart
