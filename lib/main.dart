@@ -1,4 +1,6 @@
+import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_clone2/app_login_firebase/auth/login_screen.dart';
 // import 'package:flutter_clone2/app_contact/03-11_splashlogo.dart';
 import 'package:flutter_clone2/app_weather_api/13-03_weather_home.dart';
 // import 'package:flutter_clone2/app_note/11-03_noteHome.dart';
@@ -9,7 +11,11 @@ import 'package:flutter_clone2/app_weather_api/13-03_weather_home.dart';
 // import 'package:flutter_clone2/03-07_splash_logo.dart';
 // import 'package:flutter_clone2/app_quiz/03-10_home.dart';
 
-void main() {
+Future<void> main() async {
+  WidgetsFlutterBinding.ensureInitialized();
+
+  await Firebase.initializeApp();
+
   runApp(const MyApp());
 }
 
@@ -28,7 +34,8 @@ class MyApp extends StatelessWidget {
       // home: SplashLogoContact(), //app_contact
       // home: SplashLogo(), //app_quiz
       // home: NoteHome(),
-      home: WeatherHome(),
+      // home: WeatherHome(),
+      home: LoginScreenFirebase(),
     );
   }
 }
