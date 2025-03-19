@@ -1,15 +1,7 @@
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_clone2/app_login_firebase/auth/login_screen.dart';
-// import 'package:flutter_clone2/app_contact/03-11_splashlogo.dart';
-import 'package:flutter_clone2/app_weather_api/13-03_weather_home.dart';
-// import 'package:flutter_clone2/app_note/11-03_noteHome.dart';
-// import 'package:flutter_clone2/app_quiz/03-07_splash_logo.dart';
-// import 'package:flutter_clone2/02-28_login1.dart';
-// import 'package:flutter_clone2/03-04_test.dart';
-// import 'package:flutter_clone2/03-06_splashscreen.dart';
-// import 'package:flutter_clone2/03-07_splash_logo.dart';
-// import 'package:flutter_clone2/app_quiz/03-10_home.dart';
+import 'package:flutter_clone2/app_login_firebase/widgets/homescreen.dart';
 
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -35,7 +27,12 @@ class MyApp extends StatelessWidget {
       // home: SplashLogo(), //app_quiz
       // home: NoteHome(),
       // home: WeatherHome(),
-      home: LoginScreenFirebase(),
+      // home: LoginScreenFirebase(),
+      initialRoute: '/login',
+      routes: {
+        '/login': (context) => const LoginScreenFirebase(),
+        '/home': (context) => const HomeScreenFirebase(),
+      },
     );
   }
 }

@@ -1,11 +1,8 @@
-import 'dart:developer';
 import 'package:flutter/material.dart';
 import 'package:flutter_clone2/app_login_firebase/auth/auth_service.dart';
 import 'package:flutter_clone2/app_login_firebase/auth/signup_screen.dart';
 import 'package:flutter_clone2/app_login_firebase/widgets/button.dart';
-import 'package:flutter_clone2/app_login_firebase/widgets/homescreen.dart';
 import 'package:flutter_clone2/app_login_firebase/widgets/textfield.dart';
-import 'package:flutter_clone2/app_weather_api/13-03_weather_home.dart';
 
 class LoginScreenFirebase extends StatefulWidget {
   const LoginScreenFirebase({super.key});
@@ -16,15 +13,14 @@ class LoginScreenFirebase extends StatefulWidget {
 
 class _LoginScreenState extends State<LoginScreenFirebase> {
   final _auth = AuthService();
-
   final _email = TextEditingController();
   final _password = TextEditingController();
 
   @override
   void dispose() {
-    super.dispose();
     _email.dispose();
     _password.dispose();
+    super.dispose();
   }
 
   @override
@@ -54,11 +50,16 @@ class _LoginScreenState extends State<LoginScreenFirebase> {
             ),
             const SizedBox(height: 30),
             CustomButton(label: "Login", onPressed: _login),
+            const SizedBox(height: 10),
+            CustomButton2(
+              label: "",
+              onPressed: () => _auth.loginWithGoogle(context),
+            ),
             const SizedBox(height: 5),
             Row(
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
-                const Text("Already have an account? "),
+                const Text("Don't have an account? "),
                 InkWell(
                   onTap: () => goToSignup(context),
                   child: const Text(
@@ -80,11 +81,6 @@ class _LoginScreenState extends State<LoginScreenFirebase> {
     MaterialPageRoute(builder: (context) => const SignupScreen()),
   );
 
-  goToHome(BuildContext context) => Navigator.push(
-    context,
-    MaterialPageRoute(builder: (context) => WeatherHome()),
-  );
-
   _login() async {
     final user = await _auth.loginUserWithEmailAndPassword(
       _email.text,
@@ -92,8 +88,7 @@ class _LoginScreenState extends State<LoginScreenFirebase> {
     );
 
     if (user != null) {
-      log("User Logged In");
-      goToHome(context);
+      Navigator.pushReplacementNamed(context, '/home');
     }
   }
 }
