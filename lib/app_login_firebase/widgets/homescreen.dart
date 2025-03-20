@@ -10,6 +10,7 @@ class HomeScreenFirebase extends StatelessWidget {
 
     return Scaffold(
       appBar: AppBar(
+        automaticallyImplyLeading: false,
         title: const Text("Home"),
         actions: [
           IconButton(

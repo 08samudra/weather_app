@@ -1,5 +1,6 @@
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_clone2/app_1/splash_screen1/splash_app1.dart';
 import 'package:flutter_clone2/app_login_firebase/auth/login_screen.dart';
 import 'package:flutter_clone2/app_login_firebase/widgets/homescreen.dart';
 
@@ -28,8 +29,9 @@ class MyApp extends StatelessWidget {
       // home: NoteHome(),
       // home: WeatherHome(),
       // home: LoginScreenFirebase(),
-      initialRoute: '/login',
+      initialRoute: '/splash',
       routes: {
+        '/splash': (context) => const SplashLogoApp1(),
         '/login': (context) => const LoginScreenFirebase(),
         '/home': (context) => const HomeScreenFirebase(),
       },
