@@ -1,23 +1,27 @@
+import 'dart:developer';
 import 'package:flutter/material.dart';
-import 'package:flutter_clone2/app_login_firebase/auth/auth_service.dart';
-import 'package:flutter_clone2/app_login_firebase/auth/signup_screen.dart';
-import 'package:flutter_clone2/app_login_firebase/widgets/button.dart';
-import 'package:flutter_clone2/app_login_firebase/widgets/textfield.dart';
+import 'package:fluttertoast/fluttertoast.dart';
+import 'package:flutter_clone2/app_1/app_login_firebase/auth/auth_service.dart';
+import 'package:flutter_clone2/app_1/app_login_firebase/auth/login_screen.dart';
+import 'package:flutter_clone2/app_1/app_login_firebase/widgets/button.dart';
+import 'package:flutter_clone2/app_1/app_login_firebase/widgets/textfield.dart';
 
-class LoginScreenFirebase extends StatefulWidget {
-  const LoginScreenFirebase({super.key});
+class SignupScreen extends StatefulWidget {
+  const SignupScreen({super.key});
 
   @override
-  State<LoginScreenFirebase> createState() => _LoginScreenState();
+  State<SignupScreen> createState() => _SignupScreenState();
 }
 
-class _LoginScreenState extends State<LoginScreenFirebase> {
+class _SignupScreenState extends State<SignupScreen> {
   final _auth = AuthService();
+  final _name = TextEditingController();
   final _email = TextEditingController();
   final _password = TextEditingController();
 
   @override
   void dispose() {
+    _name.dispose();
     _email.dispose();
     _password.dispose();
     super.dispose();
@@ -32,10 +36,16 @@ class _LoginScreenState extends State<LoginScreenFirebase> {
           children: [
             const Spacer(),
             const Text(
-              "Login",
+              "Signup",
               style: TextStyle(fontSize: 40, fontWeight: FontWeight.w500),
             ),
             const SizedBox(height: 50),
+            CustomTextField(
+              hint: "Enter Name",
+              label: "Name",
+              controller: _name,
+            ),
+            const SizedBox(height: 20),
             CustomTextField(
               hint: "Enter Email",
               label: "Email",
@@ -49,21 +59,16 @@ class _LoginScreenState extends State<LoginScreenFirebase> {
               controller: _password,
             ),
             const SizedBox(height: 30),
-            CustomButton(label: "Login", onPressed: _login),
-            const SizedBox(height: 10),
-            CustomButton2(
-              label: "",
-              onPressed: () => _auth.loginWithGoogle(context),
-            ),
+            CustomButton(label: "Signup", onPressed: _signup),
             const SizedBox(height: 5),
             Row(
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
-                const Text("Don't have an account? "),
+                const Text("Already have an account? "),
                 InkWell(
-                  onTap: () => goToSignup(context),
+                  onTap: () => goToLogin(context),
                   child: const Text(
-                    "Signup",
+                    "Login",
                     style: TextStyle(color: Colors.red),
                   ),
                 ),
@@ -76,19 +81,23 @@ class _LoginScreenState extends State<LoginScreenFirebase> {
     );
   }
 
-  goToSignup(BuildContext context) => Navigator.push(
+  goToLogin(BuildContext context) => Navigator.push(
     context,
-    MaterialPageRoute(builder: (context) => const SignupScreen()),
+    MaterialPageRoute(builder: (context) => LoginScreenFirebase()),
   );
 
-  _login() async {
-    final user = await _auth.loginUserWithEmailAndPassword(
+  _signup() async {
+    final user = await _auth.createUserWithEmailAndPassword(
       _email.text,
       _password.text,
     );
-
     if (user != null) {
-      Navigator.pushReplacementNamed(context, '/home');
+      log("User Created Successfully");
+      Fluttertoast.showToast(
+        msg: "Akun berhasil dibuat!",
+        toastLength: Toast.LENGTH_SHORT,
+      );
+      goToLogin(context);
     }
   }
 }

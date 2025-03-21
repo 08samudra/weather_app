@@ -1,8 +1,9 @@
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_clone2/app_1/splash_screen1/splash_app1.dart';
-import 'package:flutter_clone2/app_login_firebase/auth/login_screen.dart';
-import 'package:flutter_clone2/app_login_firebase/widgets/homescreen.dart';
+import 'package:flutter_clone2/app_1/app_login_firebase/auth/login_screen.dart';
+import 'package:flutter_clone2/app_1/app_login_firebase/widgets/homescreen.dart';
+import 'package:flutter_clone2/app_weather_api/13-03_weather_home.dart';
 
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
