@@ -14,6 +14,14 @@
       },
       "oauth_client": [
         {
+          "client_id": "753674526152-7u0vpdv24g9d3sqr0cf3g62ma80q9pk7.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.example.flutter_clone2",
+            "certificate_hash": "063384e2ecdb79af17f5f914433172db38398a4c"
+          }
+        },
+        {
           "client_id": "753674526152-gq9m08kibk5b0hoonncv4or9478k15e1.apps.googleusercontent.com",
           "client_type": 3
         }
@@ -55,6 +63,14 @@
           "android_info": {
             "package_name": "com.flutter.clone2",
             "certificate_hash": "0af6e9328d043b2e0d23b8a5cfa8a8cec8ac22e5"
+          }
+        },
+        {
+          "client_id": "753674526152-8u8riiclhk4iqml0tee12ep71lb6v774.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.flutter.clone2",
+            "certificate_hash": "063384e2ecdb79af17f5f914433172db38398a4c"
           }
         },
         {
