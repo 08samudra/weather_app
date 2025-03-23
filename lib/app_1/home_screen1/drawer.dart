@@ -10,7 +10,7 @@ class MyDrawer extends StatelessWidget {
       child: Column(
         children: [
           DrawerHeader(
-            child: Icon(Icons.person, color: Colors.white, size: 64),
+            child: Icon(Icons.person, color: Colors.greenAccent, size: 64),
           ),
         ],
       ),
