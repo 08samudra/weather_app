@@ -15,30 +15,38 @@ class MyDrawer extends StatelessWidget {
     return Drawer(
       backgroundColor: Color.fromRGBO(33, 161, 216, 1),
       child: Column(
+        mainAxisAlignment: MainAxisAlignment.spaceBetween,
         children: [
-          DrawerHeader(
-            child: Icon(Icons.person, color: Colors.white, size: 64),
-          ),
+          Column(
+            children: [
+              DrawerHeader(
+                child: Icon(Icons.person, color: Colors.white, size: 64),
+              ),
 
-          //home list tile
-          MyListTile(
-            icon: Icons.home,
-            text: 'H o m e',
-            onTap: () => Navigator.pop(context),
-          ),
+              //home list tile
+              MyListTile(
+                icon: Icons.home,
+                text: 'H o m e',
+                onTap: () => Navigator.pop(context),
+              ),
 
-          //profile list tile
-          MyListTile(
-            icon: Icons.person,
-            text: 'P r o f i l e',
-            onTap: onProfileTap,
+              //profile list tile
+              MyListTile(
+                icon: Icons.person,
+                text: 'P r o f i l e',
+                onTap: onProfileTap,
+              ),
+            ],
           ),
 
           // sign out list tile
-          MyListTile(
-            icon: Icons.logout,
-            text: 'S i g n O u t',
-            onTap: onSignOut,
+          Padding(
+            padding: const EdgeInsets.only(bottom: 25.0),
+            child: MyListTile(
+              icon: Icons.logout,
+              text: 'L o g o u t',
+              onTap: onSignOut,
+            ),
           ),
         ],
       ),

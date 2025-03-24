@@ -1,4 +1,5 @@
 import 'dart:developer';
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:fluttertoast/fluttertoast.dart';
@@ -50,7 +51,13 @@ class AuthService {
         email: email,
         password: password,
       );
-      return cred.user;
+      if (cred.user != null) {
+        FirebaseFirestore.instance
+            .collection("Users")
+            .doc(cred.user!.email)
+            .set({'username': email.split('@')[0], 'city': 'Empty city..'});
+        return cred.user;
+      }
     } catch (e) {
       log("Something went wrong: $e");
       Fluttertoast.showToast(msg: "Terjadi kesalahan saat mendaftar.");
