@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_clone2/app_1/home_screen1/list_tile.dart';
+import 'package:flutter_clone2/app_1/firebase_login/widgets/list_tile.dart';
 
 class MyDrawer extends StatelessWidget {
   final void Function()? onProfileTap;
@@ -13,7 +13,7 @@ class MyDrawer extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Drawer(
-      backgroundColor: Color.fromRGBO(33, 161, 216, 1),
+      backgroundColor: Color.fromARGB(255, 28, 119, 238),
       child: Column(
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
         children: [

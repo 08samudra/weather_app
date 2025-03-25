@@ -1,18 +1,17 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_clone2/app_weather_api/14-03_weather_data.dart';
+import 'package:flutter_clone2/app_1/api_service/bandung.dart';
+import 'package:flutter_clone2/app_1/api_service/weather_data.dart';
 import 'package:intl/intl.dart';
-import 'package:flutter_clone2/app_weather_api/13-03_service.dart';
 
-class WeatherHome extends StatefulWidget {
-  // final String cityName;
-  const WeatherHome({super.key});
+class WeatherBandung extends StatefulWidget {
+  const WeatherBandung({super.key});
 
   @override
-  State<WeatherHome> createState() => _WeatherHomeState();
+  State<WeatherBandung> createState() => _WeatherBandungState();
 }
 
-class _WeatherHomeState extends State<WeatherHome> {
-  late WeatherData weatherInfo;
+class _WeatherBandungState extends State<WeatherBandung> {
+  late WeatherDataApp weatherInfo;
   bool isLoading = false;
 
   Future<void> myWeather() async {
@@ -20,7 +19,7 @@ class _WeatherHomeState extends State<WeatherHome> {
       isLoading = false;
     });
     try {
-      WeatherData value = await WeatherServices().fetchWeather();
+      WeatherDataApp value = await WeatherServicesBandung().fetchWeather();
 
       setState(() {
         weatherInfo = value;
@@ -31,12 +30,15 @@ class _WeatherHomeState extends State<WeatherHome> {
       setState(() {
         isLoading = true;
       });
+      ScaffoldMessenger.of(context).showSnackBar(
+        SnackBar(content: Text('Failed to load weather data: $e')),
+      );
     }
   }
 
   @override
   void initState() {
-    weatherInfo = WeatherData(
+    weatherInfo = WeatherDataApp(
       name: '',
       temperature: Temperature(current: 0.0),
       humidity: 0,
@@ -56,7 +58,7 @@ class _WeatherHomeState extends State<WeatherHome> {
     String formattedDate = DateFormat('EEEE d MMMM').format(DateTime.now());
     String formattedTime = DateFormat('hh:mm a').format(DateTime.now());
     return Scaffold(
-      backgroundColor: const Color.fromARGB(255, 35, 42, 240),
+      backgroundColor: const Color.fromARGB(255, 2, 108, 170),
       body: RefreshIndicator(
         onRefresh: () async {
           await Future.delayed(const Duration(seconds: 2));
@@ -91,7 +93,7 @@ class _WeatherHomeState extends State<WeatherHome> {
 }
 
 class WeatherDetail extends StatelessWidget {
-  final WeatherData weather;
+  final WeatherDataApp weather;
   final String formattedDate;
   final String formattedTime;
   const WeatherDetail({

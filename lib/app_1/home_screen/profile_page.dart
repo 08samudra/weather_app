@@ -1,8 +1,7 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_clone2/app_1/home_screen1/text_box.dart';
-import 'package:get/get_state_manager/src/rx_flutter/rx_notifier.dart';
+import 'package:flutter_clone2/app_1/firebase_login/widgets/text_box.dart';
 
 class ProfilePage extends StatefulWidget {
   const ProfilePage({super.key});
