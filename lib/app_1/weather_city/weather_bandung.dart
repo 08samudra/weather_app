@@ -92,6 +92,25 @@ class _WeatherBandungState extends State<WeatherBandung> {
   }
 }
 
+String getWeatherImagePath(String weatherCondition) {
+  switch (weatherCondition.toLowerCase()) {
+    case 'clear':
+      return "assets/images/clear.png";
+    case 'clouds':
+      return "assets/images/cloudy.png";
+    case 'rain':
+      return "assets/images/rain.png";
+    case 'thunderstorm':
+      return "assets/images/thunderstorm.png";
+    case 'drizzle':
+      return "assets/images/drizzle.png";
+    case 'snow':
+      return "assets/images/snow.png";
+    default:
+      return "assets/images/cloudy.png"; // Gambar default
+  }
+}
+
 class WeatherDetail extends StatelessWidget {
   final WeatherDataApp weather;
   final String formattedDate;
@@ -105,6 +124,11 @@ class WeatherDetail extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    String weatherCondition =
+        weather.weather.isNotEmpty
+            ? weather.weather[0].main
+            : 'Clouds'; // Kondisi cuaca default
+    String imagePath = getWeatherImagePath(weatherCondition);
     return Column(
       children: [
         // for current address name
@@ -157,10 +181,8 @@ class WeatherDetail extends StatelessWidget {
         Container(
           height: 200,
           width: 200,
-          decoration: const BoxDecoration(
-            image: DecorationImage(
-              image: AssetImage("assets/images/cloudy.png"),
-            ),
+          decoration: BoxDecoration(
+            image: DecorationImage(image: AssetImage(imagePath)),
           ),
         ),
         const SizedBox(height: 30),
