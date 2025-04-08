@@ -3,13 +3,13 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter_clone2/app_1/api_service/weather_data.dart';
 import 'package:http/http.dart' as http;
 
-class WeatherServicesKuningan {
+class WeatherServicesMamuju {
   final FirebaseFirestore _firestore = FirebaseFirestore.instance;
 
   Future<WeatherDataApp> fetchWeather() async {
     final response = await http.get(
       Uri.parse(
-        "https://api.openweathermap.org/data/2.5/weather?lat=-6.9766048&lon=108.4849021&appid=583a574acc2de26c2cc56061db8d8544",
+        "https://api.openweathermap.org/data/2.5/weather?lat=-2.676233&lon=118.890488&appid=583a574acc2de26c2cc56061db8d8544",
       ),
     );
 

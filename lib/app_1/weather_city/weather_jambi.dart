@@ -1,16 +1,16 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_clone2/app_1/api_service/kuningan.dart';
+import 'package:flutter_clone2/app_1/api_service/jambi.dart';
 import 'package:flutter_clone2/app_1/api_service/weather_data.dart';
 import 'package:intl/intl.dart';
 
-class WeatherKuningan extends StatefulWidget {
-  const WeatherKuningan({super.key});
+class WeatherJambi extends StatefulWidget {
+  const WeatherJambi({super.key});
 
   @override
-  State<WeatherKuningan> createState() => _WeatherKuninganState();
+  State<WeatherJambi> createState() => _WeatherJambiState();
 }
 
-class _WeatherKuninganState extends State<WeatherKuningan> {
+class _WeatherJambiState extends State<WeatherJambi> {
   late WeatherDataApp weatherInfo;
   bool isLoading = false;
 
@@ -19,7 +19,7 @@ class _WeatherKuninganState extends State<WeatherKuningan> {
       isLoading = false;
     });
     try {
-      WeatherDataApp value = await WeatherServicesKuningan().fetchWeather();
+      WeatherDataApp value = await WeatherServicesJambi().fetchWeather();
 
       setState(() {
         weatherInfo = value;

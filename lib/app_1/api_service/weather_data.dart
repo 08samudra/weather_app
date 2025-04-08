@@ -54,8 +54,16 @@ class Temperature {
 
   Temperature({required this.current});
 
-  factory Temperature.fromJson(double current) {
-    return Temperature(current: current - 273.15);
+  factory Temperature.fromJson(dynamic current) {
+    if (current is int) {
+      return Temperature(current: (current - 273.15).toDouble());
+    } else if (current is double) {
+      return Temperature(current: current - 273.15);
+    } else {
+      return Temperature(
+        current: 0.0,
+      ); // Atau nilai default lainnya, atau throw error
+    }
   }
 }
 
@@ -65,6 +73,12 @@ class Wind {
   Wind({required this.speed});
 
   factory Wind.fromJson(Map<String, dynamic> json) {
-    return Wind(speed: json['speed']);
+    if (json['speed'] is int) {
+      return Wind(speed: json['speed'].toDouble());
+    } else if (json['speed'] is double) {
+      return Wind(speed: json['speed']);
+    } else {
+      return Wind(speed: 0.0); // Atau nilai default lainnya, atau throw error
+    }
   }
 }
