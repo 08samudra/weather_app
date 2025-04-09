@@ -62,7 +62,7 @@ class _ProfilePageState extends State<ProfilePage> {
     return Scaffold(
       appBar: AppBar(
         title: Text('Profile Page '),
-        backgroundColor: Color.fromRGBO(33, 161, 216, 1),
+        backgroundColor: Color(0xFF778da9),
       ),
       body: StreamBuilder<DocumentSnapshot>(
         stream:

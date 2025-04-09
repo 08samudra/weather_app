@@ -31,8 +31,17 @@ class _LoginScreenState extends State<LoginScreenFirebase> {
         child: Column(
           children: [
             const Spacer(),
+            // Tambahkan gambar di sini
+            Image.asset(
+              'assets/images/thunderstorm.png', // Ganti dengan path gambar Anda
+              height: 150,
+              color: (Colors.black), // Sesuaikan tinggi gambar sesuai keinginan
+            ),
+            const SizedBox(
+              height: 30,
+            ), // Tambahkan sedikit ruang antara gambar dan teks
             const Text(
-              "Login",
+              "Weather",
               style: TextStyle(fontSize: 40, fontWeight: FontWeight.w500),
             ),
             const SizedBox(height: 50),

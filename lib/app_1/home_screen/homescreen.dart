@@ -40,6 +40,43 @@ import 'package:flutter_clone2/app_1/weather_city/weather_surabaya.dart'; // Imp
 class HomeScreenFirebase extends StatelessWidget {
   const HomeScreenFirebase({super.key});
 
+  final List<Map<String, dynamic>> _cities = const [
+    {'name': 'Ambon', 'widget': WeatherAmbon()},
+    {'name': 'Banda Aceh', 'widget': WeatherAceh()},
+    {'name': 'Bandar Lampung', 'widget': WeatherLampung()},
+    {'name': 'Bandung', 'widget': WeatherBandung()},
+    {'name': 'Banjarbaru', 'widget': WeatherBanjarbaru()},
+    {'name': 'Bengkulu', 'widget': WeatherBengkulu()},
+    {'name': 'Denpasar', 'widget': WeatherDenpasar()},
+    {'name': 'Gorontalo', 'widget': WeatherGorontalo()},
+    {'name': 'Jakarta', 'widget': WeatherJakarta()},
+    {'name': 'Jambi', 'widget': WeatherJambi()},
+    {'name': 'Jayapura', 'widget': WeatherJayapura()},
+    {'name': 'Jayawijaya', 'widget': WeatherJayawijaya()},
+    {'name': 'Kendari', 'widget': WeatherKendari()},
+    {'name': 'Kuningan', 'widget': WeatherKuningan()},
+    {'name': 'Kupang', 'widget': WeatherKupang()},
+    {'name': 'Makassar', 'widget': WeatherMakassar()},
+    {'name': 'Mamuju', 'widget': WeatherMamuju()},
+    {'name': 'Manado', 'widget': WeatherManado()},
+    {'name': 'Manokwari', 'widget': WeatherManokwari()},
+    {'name': 'Mataram', 'widget': WeatherMataram()},
+    {'name': 'Medan', 'widget': WeatherMedan()},
+    {'name': 'Padang', 'widget': WeatherPadang()},
+    {'name': 'Palangka Raya', 'widget': WeatherPalangkaRaya()},
+    {'name': 'Palembang', 'widget': WeatherPalembang()},
+    {'name': 'Pangkal Pinang', 'widget': WeatherPangkalPinang()},
+    {'name': 'Pekanbaru', 'widget': WeatherPekanbaru()},
+    {'name': 'Pontianak', 'widget': WeatherPontianak()},
+    {'name': 'Salor', 'widget': WeatherSalor()},
+    {'name': 'Samarinda', 'widget': WeatherSamarinda()},
+    {'name': 'Semarang', 'widget': WeatherSemarang()},
+    {'name': 'Serang', 'widget': WeatherSerang()},
+    {'name': 'Sofifi', 'widget': WeatherSofifi()},
+    {'name': 'Sorong', 'widget': WeatherSorong()},
+    {'name': 'Surabaya', 'widget': WeatherSurabaya()},
+  ];
+
   @override
   Widget build(BuildContext context) {
     final authService = AuthService();
@@ -60,427 +97,41 @@ class HomeScreenFirebase extends StatelessWidget {
       ),
       body: Padding(
         padding: const EdgeInsets.only(left: 16.0, top: 16.0, right: 16.0),
-        child: SingleChildScrollView(
-          // Tambahkan SingleChildScrollView di sini
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: <Widget>[
-              Text(
-                'List of',
-                style: TextStyle(fontSize: 20, color: Colors.grey[500]),
-              ),
-              const Text(
-                'Cities',
-                style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
-              ),
-              const SizedBox(height: 10),
-              InkWell(
-                onTap: () {
-                  Navigator.push(
-                    context,
-                    MaterialPageRoute(builder: (context) => WeatherAmbon()),
-                  );
-                },
-                child: CityCard(cityName: 'Ambon'),
-              ),
-              ////////////////////////////////////////////////////////////////////
-              const SizedBox(height: 10),
-              InkWell(
-                onTap: () {
-                  Navigator.push(
-                    context,
-                    MaterialPageRoute(builder: (context) => WeatherAceh()),
-                  );
-                },
-                child: CityCard(cityName: 'Banda Aceh'),
-              ),
-              ////////////////////////////////////////////////////////////////////
-              const SizedBox(height: 10),
-              InkWell(
-                onTap: () {
-                  Navigator.push(
-                    context,
-                    MaterialPageRoute(builder: (context) => WeatherLampung()),
-                  );
-                },
-                child: CityCard(cityName: 'Bandar Lampung'),
-              ),
-              ////////////////////////////////////////////////////////////////////
-              const SizedBox(height: 10),
-              InkWell(
-                onTap: () {
-                  Navigator.push(
-                    context,
-                    MaterialPageRoute(builder: (context) => WeatherBandung()),
-                  );
-                },
-                child: CityCard(cityName: 'Bandung'),
-              ),
-              ////////////////////////////////////////////////////////////////////
-              const SizedBox(height: 10),
-              InkWell(
-                onTap: () {
-                  Navigator.push(
-                    context,
-                    MaterialPageRoute(
-                      builder: (context) => WeatherBanjarbaru(),
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: <Widget>[
+            Text(
+              'List of',
+              style: TextStyle(fontSize: 20, color: Colors.grey[500]),
+            ),
+            const Text(
+              'Cities',
+              style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
+            ),
+            const SizedBox(height: 10),
+            Expanded(
+              child: ListView.builder(
+                itemCount: _cities.length,
+                itemBuilder: (context, index) {
+                  final city = _cities[index];
+                  return Padding(
+                    padding: const EdgeInsets.only(bottom: 10.0),
+                    child: InkWell(
+                      onTap: () {
+                        Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                            builder: (context) => city['widget'],
+                          ),
+                        );
+                      },
+                      child: CityCard(cityName: city['name']),
                     ),
                   );
                 },
-                child: CityCard(cityName: 'Banjarbaru'),
               ),
-              ////////////////////////////////////////////////////////////////////
-              const SizedBox(height: 10),
-              InkWell(
-                onTap: () {
-                  Navigator.push(
-                    context,
-                    MaterialPageRoute(builder: (context) => WeatherBengkulu()),
-                  );
-                },
-                child: CityCard(cityName: 'Bengkulu'),
-              ),
-              ////////////////////////////////////////////////////////////////////
-              const SizedBox(height: 10),
-              InkWell(
-                onTap: () {
-                  Navigator.push(
-                    context,
-                    MaterialPageRoute(builder: (context) => WeatherDenpasar()),
-                  );
-                },
-                child: CityCard(cityName: 'Denpasar'),
-              ),
-              ////////////////////////////////////////////////////////////////////
-              const SizedBox(height: 10),
-              InkWell(
-                onTap: () {
-                  Navigator.push(
-                    context,
-                    MaterialPageRoute(builder: (context) => WeatherGorontalo()),
-                  );
-                },
-                child: CityCard(cityName: 'Gorontalo'),
-              ),
-              ////////////////////////////////////////////////////////////////////
-              const SizedBox(height: 10),
-              InkWell(
-                onTap: () {
-                  Navigator.push(
-                    context,
-                    MaterialPageRoute(
-                      builder: (context) => WeatherJakarta(),
-                    ), // Menggunakan halaman cuaca Anda
-                  );
-                },
-                child: CityCard(cityName: 'Jakarta'),
-              ),
-              ////////////////////////////////////////////////////////////////////
-              const SizedBox(height: 10),
-              InkWell(
-                onTap: () {
-                  Navigator.push(
-                    context,
-                    MaterialPageRoute(builder: (context) => WeatherJambi()),
-                  );
-                },
-                child: CityCard(cityName: 'Jambi'),
-              ),
-              ////////////////////////////////////////////////////////////////////
-              const SizedBox(height: 10),
-              InkWell(
-                onTap: () {
-                  Navigator.push(
-                    context,
-                    MaterialPageRoute(builder: (context) => WeatherJayapura()),
-                  );
-                },
-                child: CityCard(cityName: 'Jayapura'),
-              ),
-              ////////////////////////////////////////////////////////////////////
-              const SizedBox(height: 10),
-              InkWell(
-                onTap: () {
-                  Navigator.push(
-                    context,
-                    MaterialPageRoute(
-                      builder: (context) => WeatherJayawijaya(),
-                    ),
-                  );
-                },
-                child: CityCard(cityName: 'Jayawijaya'),
-              ),
-              ////////////////////////////////////////////////////////////////////
-              const SizedBox(height: 10),
-              InkWell(
-                onTap: () {
-                  Navigator.push(
-                    context,
-                    MaterialPageRoute(builder: (context) => WeatherKendari()),
-                  );
-                },
-                child: CityCard(cityName: 'Kendari'),
-              ),
-              ////////////////////////////////////////////////////////////////////
-              const SizedBox(height: 10),
-              InkWell(
-                onTap: () {
-                  Navigator.push(
-                    context,
-                    MaterialPageRoute(builder: (context) => WeatherKuningan()),
-                  );
-                },
-                child: CityCard(cityName: 'Kuningan'),
-              ),
-              ////////////////////////////////////////////////////////////////////
-              const SizedBox(height: 10),
-              InkWell(
-                onTap: () {
-                  Navigator.push(
-                    context,
-                    MaterialPageRoute(builder: (context) => WeatherKupang()),
-                  );
-                },
-                child: CityCard(cityName: 'Kupang'),
-              ),
-              ////////////////////////////////////////////////////////////////////
-              const SizedBox(height: 10),
-              InkWell(
-                onTap: () {
-                  Navigator.push(
-                    context,
-                    MaterialPageRoute(builder: (context) => WeatherMakassar()),
-                  );
-                },
-                child: CityCard(cityName: 'Makassar'),
-              ),
-              ////////////////////////////////////////////////////////////////////
-              const SizedBox(height: 10),
-              InkWell(
-                onTap: () {
-                  Navigator.push(
-                    context,
-                    MaterialPageRoute(builder: (context) => WeatherMamuju()),
-                  );
-                },
-                child: CityCard(cityName: 'Mamuju'),
-              ),
-              ////////////////////////////////////////////////////////////////////
-              const SizedBox(height: 10),
-              InkWell(
-                onTap: () {
-                  Navigator.push(
-                    context,
-                    MaterialPageRoute(builder: (context) => WeatherManado()),
-                  );
-                },
-                child: CityCard(cityName: 'Manado'),
-              ),
-              ////////////////////////////////////////////////////////////////////
-              const SizedBox(height: 10),
-              InkWell(
-                onTap: () {
-                  Navigator.push(
-                    context,
-                    MaterialPageRoute(builder: (context) => WeatherManokwari()),
-                  );
-                },
-                child: CityCard(cityName: 'Manokwari'),
-              ),
-              ////////////////////////////////////////////////////////////////////
-              const SizedBox(height: 10),
-              InkWell(
-                onTap: () {
-                  Navigator.push(
-                    context,
-                    MaterialPageRoute(builder: (context) => WeatherMataram()),
-                  );
-                },
-                child: CityCard(cityName: 'Mataram'),
-              ),
-              ////////////////////////////////////////////////////////////////////
-              const SizedBox(height: 10),
-              InkWell(
-                onTap: () {
-                  Navigator.push(
-                    context,
-                    MaterialPageRoute(builder: (context) => WeatherMedan()),
-                  );
-                },
-                child: CityCard(cityName: 'Medan'),
-              ),
-              ////////////////////////////////////////////////////////////////////
-              const SizedBox(height: 10),
-              InkWell(
-                onTap: () {
-                  Navigator.push(
-                    context,
-                    MaterialPageRoute(builder: (context) => WeatherPadang()),
-                  );
-                },
-                child: CityCard(cityName: 'Padang'),
-              ),
-              ////////////////////////////////////////////////////////////////////
-              const SizedBox(height: 10),
-              InkWell(
-                onTap: () {
-                  Navigator.push(
-                    context,
-                    MaterialPageRoute(
-                      builder: (context) => WeatherPalangkaRaya(),
-                    ),
-                  );
-                },
-                child: CityCard(cityName: 'Palangka Raya'),
-              ),
-              ////////////////////////////////////////////////////////////////////
-              const SizedBox(height: 10),
-              InkWell(
-                onTap: () {
-                  Navigator.push(
-                    context,
-                    MaterialPageRoute(builder: (context) => WeatherPalembang()),
-                  );
-                },
-                child: CityCard(cityName: 'Palembang'),
-              ),
-              ////////////////////////////////////////////////////////////////////
-              const SizedBox(height: 10),
-              InkWell(
-                onTap: () {
-                  Navigator.push(
-                    context,
-                    MaterialPageRoute(
-                      builder: (context) => WeatherPangkalPinang(),
-                    ),
-                  );
-                },
-                child: CityCard(cityName: 'Pangkal Pinang'),
-              ),
-              ////////////////////////////////////////////////////////////////////
-              const SizedBox(height: 10),
-              InkWell(
-                onTap: () {
-                  Navigator.push(
-                    context,
-                    MaterialPageRoute(builder: (context) => WeatherPekanbaru()),
-                  );
-                },
-                child: CityCard(cityName: 'Pekanbaru'),
-              ),
-              ////////////////////////////////////////////////////////////////////
-              const SizedBox(height: 10),
-              InkWell(
-                onTap: () {
-                  Navigator.push(
-                    context,
-                    MaterialPageRoute(builder: (context) => WeatherPontianak()),
-                  );
-                },
-                child: CityCard(cityName: 'Pontianak'),
-              ),
-              ////////////////////////////////////////////////////////////////////
-              const SizedBox(height: 10),
-              InkWell(
-                onTap: () {
-                  Navigator.push(
-                    context,
-                    MaterialPageRoute(builder: (context) => WeatherSalor()),
-                  );
-                },
-                child: CityCard(cityName: 'Salor'),
-              ),
-              ////////////////////////////////////////////////////////////////////
-              const SizedBox(height: 10),
-              InkWell(
-                onTap: () {
-                  Navigator.push(
-                    context,
-                    MaterialPageRoute(builder: (context) => WeatherSamarinda()),
-                  );
-                },
-                child: CityCard(cityName: 'Samarinda'),
-              ),
-              ////////////////////////////////////////////////////////////////////
-              const SizedBox(height: 10),
-              InkWell(
-                onTap: () {
-                  Navigator.push(
-                    context,
-                    MaterialPageRoute(builder: (context) => WeatherSemarang()),
-                  );
-                },
-                child: CityCard(cityName: 'Semarang'),
-              ),
-              ////////////////////////////////////////////////////////////////////
-              const SizedBox(height: 10),
-              InkWell(
-                onTap: () {
-                  Navigator.push(
-                    context,
-                    MaterialPageRoute(builder: (context) => WeatherSerang()),
-                  );
-                },
-                child: CityCard(cityName: 'Serang'),
-              ),
-              ////////////////////////////////////////////////////////////////////
-              const SizedBox(height: 10),
-              InkWell(
-                onTap: () {
-                  Navigator.push(
-                    context,
-                    MaterialPageRoute(builder: (context) => WeatherSofifi()),
-                  );
-                },
-                child: CityCard(cityName: 'Sofifi'),
-              ),
-              ////////////////////////////////////////////////////////////////////
-              const SizedBox(height: 10),
-              InkWell(
-                onTap: () {
-                  Navigator.push(
-                    context,
-                    MaterialPageRoute(builder: (context) => WeatherSorong()),
-                  );
-                },
-                child: CityCard(cityName: 'Sorong'),
-              ),
-              ////////////////////////////////////////////////////////////////////
-              const SizedBox(height: 10),
-              InkWell(
-                onTap: () {
-                  Navigator.push(
-                    context,
-                    MaterialPageRoute(builder: (context) => WeatherSurabaya()),
-                  );
-                },
-                child: CityCard(cityName: 'Surabaya'),
-              ),
-              ////////////////////////////////////////////////////////////////////
-              const SizedBox(height: 10),
-              InkWell(
-                onTap: () {
-                  Navigator.push(
-                    context,
-                    MaterialPageRoute(builder: (context) => WeatherSurabaya()),
-                  );
-                },
-                child: CityCard(cityName: 'Surabaya'),
-              ),
-              ////////////////////////////////////////////////////////////////////
-              const SizedBox(height: 10),
-              InkWell(
-                onTap: () {
-                  Navigator.push(
-                    context,
-                    MaterialPageRoute(builder: (context) => WeatherSurabaya()),
-                  );
-                },
-                child: CityCard(cityName: 'Surabaya'),
-              ),
-              ////////////////////////////////////////////////////////////////////
-            ],
-          ),
+            ),
+          ],
         ),
       ),
     );
@@ -497,7 +148,7 @@ class CityCard extends StatelessWidget {
     return Container(
       padding: const EdgeInsets.all(16.0),
       decoration: BoxDecoration(
-        color: Colors.grey[300],
+        color: const Color(0xffe0e1dd),
         borderRadius: BorderRadius.circular(10.0),
       ),
       child: Row(
