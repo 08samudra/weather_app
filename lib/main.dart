@@ -1,9 +1,9 @@
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_clone2/splash_screen/splash_app1.dart';
+// import 'package:flutter_clone2/splash_screen/splash_app1.dart';
 import 'package:flutter_clone2/firebase_login/auth/login_screen.dart';
 import 'package:flutter_clone2/home_screen/homescreen.dart';
-// import 'package:flutter_clone2/app_weather_api/13-03_weather_home.dart';
+import 'package:flutter_clone2/splash_screen/splash_app1.dart';
 
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -25,11 +25,7 @@ class MyApp extends StatelessWidget {
       theme: ThemeData(
         colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
       ),
-      // home: SplashLogoContact(), //app_contact
-      // home: SplashLogo(), //app_quiz
-      // home: NoteHome(),
-      // home: WeatherHome(),
-      // home: LoginScreenFirebase(),
+
       initialRoute: '/splash',
       routes: {
         '/splash': (context) => const SplashLogoApp1(),
