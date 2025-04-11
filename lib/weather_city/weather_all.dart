@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_clone2/app_1/api_service/api_weather_services.dart';
-import 'package:flutter_clone2/app_1/api_service/weather_data.dart';
+import 'package:flutter_clone2/api_service/api_weather_services.dart';
+import 'package:flutter_clone2/api_service/weather_data.dart';
 // import 'package:flutter_clone2/app_1/api_service/weather_services.dart';
 import 'package:intl/intl.dart';
 

@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_clone2/app_1/firebase_login/auth/auth_service.dart';
-import 'package:flutter_clone2/app_1/home_screen/drawer.dart';
-import 'package:flutter_clone2/app_1/home_screen/profile_page.dart';
-import 'package:flutter_clone2/app_1/weather_city/weather_all.dart';
+import 'package:flutter_clone2/firebase_login/auth/auth_service.dart';
+import 'package:flutter_clone2/home_screen/drawer.dart';
+import 'package:flutter_clone2/home_screen/profile_page.dart';
+import 'package:flutter_clone2/weather_city/weather_all.dart';
 
 class HomeScreenFirebase extends StatelessWidget {
   const HomeScreenFirebase({super.key});
@@ -118,7 +118,7 @@ class HomeScreenFirebase extends StatelessWidget {
 class CityCard extends StatelessWidget {
   final String cityName;
 
-  const CityCard({required this.cityName});
+  const CityCard({super.key, required this.cityName});
 
   @override
   Widget build(BuildContext context) {

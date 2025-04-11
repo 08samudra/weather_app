@@ -1,6 +1,6 @@
 import 'dart:convert';
 import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:flutter_clone2/app_1/api_service/weather_data.dart';
+import 'package:flutter_clone2/api_service/weather_data.dart';
 import 'package:http/http.dart' as http;
 
 class WeatherServices {

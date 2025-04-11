@@ -1,27 +1,23 @@
-import 'dart:developer';
 import 'package:flutter/material.dart';
-import 'package:fluttertoast/fluttertoast.dart';
-import 'package:flutter_clone2/app_1/firebase_login/auth/auth_service.dart';
-import 'package:flutter_clone2/app_1/firebase_login/auth/login_screen.dart';
-import 'package:flutter_clone2/app_1/firebase_login/widgets/button.dart';
-import 'package:flutter_clone2/app_1/firebase_login/widgets/textfield.dart';
+import 'package:flutter_clone2/firebase_login/auth/auth_service.dart';
+import 'package:flutter_clone2/firebase_login/auth/signup_screen.dart';
+import 'package:flutter_clone2/firebase_login/widgets/button.dart';
+import 'package:flutter_clone2/firebase_login/widgets/textfield.dart';
 
-class SignupScreen extends StatefulWidget {
-  const SignupScreen({super.key});
+class LoginScreenFirebase extends StatefulWidget {
+  const LoginScreenFirebase({super.key});
 
   @override
-  State<SignupScreen> createState() => _SignupScreenState();
+  State<LoginScreenFirebase> createState() => _LoginScreenState();
 }
 
-class _SignupScreenState extends State<SignupScreen> {
+class _LoginScreenState extends State<LoginScreenFirebase> {
   final _auth = AuthService();
-  final _name = TextEditingController();
   final _email = TextEditingController();
   final _password = TextEditingController();
 
   @override
   void dispose() {
-    _name.dispose();
     _email.dispose();
     _password.dispose();
     super.dispose();
@@ -35,17 +31,20 @@ class _SignupScreenState extends State<SignupScreen> {
         child: Column(
           children: [
             const Spacer(),
+            // Tambahkan gambar di sini
+            Image.asset(
+              'assets/images/thunderstorm.png', // Ganti dengan path gambar Anda
+              height: 150,
+              color: (Colors.black), // Sesuaikan tinggi gambar sesuai keinginan
+            ),
+            const SizedBox(
+              height: 30,
+            ), // Tambahkan sedikit ruang antara gambar dan teks
             const Text(
-              "Signup",
+              "Weather",
               style: TextStyle(fontSize: 40, fontWeight: FontWeight.w500),
             ),
             const SizedBox(height: 50),
-            CustomTextField(
-              hint: "Enter Name",
-              label: "Name",
-              controller: _name,
-            ),
-            const SizedBox(height: 20),
             CustomTextField(
               hint: "Enter Email",
               label: "Email",
@@ -59,16 +58,21 @@ class _SignupScreenState extends State<SignupScreen> {
               controller: _password,
             ),
             const SizedBox(height: 30),
-            CustomButton(label: "Signup", onPressed: _signup),
+            CustomButton(label: "Login", onPressed: _login),
+            const SizedBox(height: 10),
+            CustomButton2(
+              label: "",
+              onPressed: () => _auth.loginWithGoogle(context),
+            ),
             const SizedBox(height: 5),
             Row(
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
-                const Text("Already have an account? "),
+                const Text("Don't have an account? "),
                 InkWell(
-                  onTap: () => goToLogin(context),
+                  onTap: () => goToSignup(context),
                   child: const Text(
-                    "Login",
+                    "Signup",
                     style: TextStyle(color: Colors.red),
                   ),
                 ),
@@ -81,23 +85,19 @@ class _SignupScreenState extends State<SignupScreen> {
     );
   }
 
-  goToLogin(BuildContext context) => Navigator.push(
+  goToSignup(BuildContext context) => Navigator.push(
     context,
-    MaterialPageRoute(builder: (context) => LoginScreenFirebase()),
+    MaterialPageRoute(builder: (context) => const SignupScreen()),
   );
 
-  _signup() async {
-    final user = await _auth.createUserWithEmailAndPassword(
+  _login() async {
+    final user = await _auth.loginUserWithEmailAndPassword(
       _email.text,
       _password.text,
     );
+
     if (user != null) {
-      log("User Created Successfully");
-      Fluttertoast.showToast(
-        msg: "Akun berhasil dibuat!",
-        toastLength: Toast.LENGTH_SHORT,
-      );
-      goToLogin(context);
+      Navigator.pushReplacementNamed(context, '/home');
     }
   }
 }

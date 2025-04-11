@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_clone2/app_1/firebase_login/widgets/list_tile.dart';
+import 'package:flutter_clone2/firebase_login/widgets/list_tile.dart';
 
 class MyDrawer extends StatelessWidget {
   final void Function()? onProfileTap;
