@@ -1,7 +1,6 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_clone2/firebase_login/widgets/text_box.dart';
 
 class ProfilePage extends StatefulWidget {
   const ProfilePage({super.key});
@@ -11,29 +10,24 @@ class ProfilePage extends StatefulWidget {
 }
 
 class _ProfilePageState extends State<ProfilePage> {
-  //user
   final currentUser = FirebaseAuth.instance.currentUser!;
-  //all users
   final usersCollection = FirebaseFirestore.instance.collection("Users");
 
-  //edit field
   Future<void> editField(String field) async {
     String newValue = "";
     await showDialog(
       context: context,
       builder:
           (context) => AlertDialog(
-            backgroundColor: Colors.grey[900],
             title: Text(
               "Edit $field",
-              style: const TextStyle(color: Colors.white),
+              style: const TextStyle(fontWeight: FontWeight.bold),
             ),
             content: TextField(
               autofocus: true,
-              style: TextStyle(color: Colors.white),
               decoration: InputDecoration(
-                hintText: "Enter new $field",
-                hintStyle: TextStyle(color: Colors.grey),
+                labelText: "New $field",
+                border: OutlineInputBorder(),
               ),
               onChanged: (value) {
                 newValue = value;
@@ -41,12 +35,11 @@ class _ProfilePageState extends State<ProfilePage> {
             ),
             actions: [
               TextButton(
-                child: Text('Cancel', style: TextStyle(color: Colors.white)),
+                child: const Text('Cancel'),
                 onPressed: () => Navigator.pop(context),
               ),
-
-              TextButton(
-                child: Text('Save', style: TextStyle(color: Colors.white)),
+              ElevatedButton(
+                child: const Text('Save'),
                 onPressed: () => Navigator.of(context).pop(newValue),
               ),
             ],
@@ -57,12 +50,51 @@ class _ProfilePageState extends State<ProfilePage> {
     }
   }
 
+  Widget _buildInfoCard({
+    required String title,
+    required String value,
+    required VoidCallback onPressed,
+  }) {
+    return Card(
+      margin: const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
+      shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(10)),
+      child: Padding(
+        padding: const EdgeInsets.all(16.0),
+        child: Row(
+          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+          children: [
+            Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                Text(
+                  title,
+                  style: TextStyle(
+                    fontWeight: FontWeight.bold,
+                    color: Colors.grey[700],
+                  ),
+                ),
+                const SizedBox(height: 4),
+                Text(value, style: const TextStyle(fontSize: 16)),
+              ],
+            ),
+            IconButton(
+              icon: const Icon(Icons.edit),
+              onPressed: onPressed,
+              color: Colors.blue,
+            ),
+          ],
+        ),
+      ),
+    );
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      backgroundColor: const Color(0XFF778da9),
       appBar: AppBar(
-        title: Text('Profile Page '),
-        backgroundColor: Color(0xFF778da9),
+        title: const Text('Profile'),
+        backgroundColor: Color.fromARGB(255, 255, 255, 255),
       ),
       body: StreamBuilder<DocumentSnapshot>(
         stream:
@@ -74,60 +106,115 @@ class _ProfilePageState extends State<ProfilePage> {
           if (snapshot.hasData) {
             final userData = snapshot.data!.data() as Map<String, dynamic>;
 
-            //
-            return ListView(
-              children: [
-                const SizedBox(height: 50),
-                //profil pic
-                Icon(Icons.person, size: 72),
-
-                const SizedBox(height: 10),
-
-                //user email
-                Text(
-                  currentUser.email!,
-                  textAlign: TextAlign.center,
-                  style: TextStyle(color: Colors.black),
-                ),
-
-                const SizedBox(height: 50),
-
-                //user details
-                Padding(
-                  padding: const EdgeInsets.only(left: 25.0),
-                  child: Text(
-                    'My Details',
-                    style: TextStyle(color: Colors.black),
+            return SingleChildScrollView(
+              padding: const EdgeInsets.all(16.0),
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.center,
+                children: [
+                  // Header Profil
+                  const CircleAvatar(
+                    radius: 50,
+                    child: Icon(
+                      Icons.person,
+                      size: 60,
+                    ), // Ganti dengan gambar profil jika ada
                   ),
-                ),
-                //username
-                MyTextBox(
-                  text: userData['username'],
-                  sectionName: 'username',
-                  onPressed: () => editField('username'),
-                ),
+                  const SizedBox(height: 16),
+                  Text(
+                    userData['username'] ?? 'No Username',
+                    style: const TextStyle(
+                      fontSize: 20,
+                      fontWeight: FontWeight.bold,
+                      color: Color.fromARGB(221, 255, 255, 255),
+                    ),
+                  ),
+                  const SizedBox(height: 8),
+                  Text(
+                    currentUser.email!,
+                    style: TextStyle(color: Colors.grey[300]),
+                  ),
+                  const SizedBox(height: 24),
 
-                //City
-                MyTextBox(
-                  text: userData['city'],
-                  sectionName: 'city',
-                  onPressed: () => editField('city'),
-                ),
+                  // Informasi Dasar
+                  const Text(
+                    'Information',
+                    style: TextStyle(
+                      fontSize: 18,
+                      fontWeight: FontWeight.bold,
+                      color: Color.fromARGB(221, 255, 255, 255),
+                    ),
+                  ),
+                  const SizedBox(height: 8),
+                  _buildInfoCard(
+                    title: 'Username',
+                    value: userData['username'] ?? '-',
+                    onPressed: () => editField('username'),
+                  ),
+                  _buildInfoCard(
+                    title: 'Kota',
+                    value: userData['city'] ?? '-',
+                    onPressed: () => editField('city'),
+                  ),
 
-                const SizedBox(height: 50),
+                  // Tambahkan informasi lain sesuai kebutuhan (misalnya, nama lengkap, nomor telepon, dll.)
+                  const SizedBox(height: 24),
 
-                //Addres
-                // Padding(
-                //   padding: const EdgeInsets.only(left: 25.0),
-                //   child: Text(
-                //     'My Addres',
-                //     style: TextStyle(color: Colors.black),
-                //   ),
-                // ),
-              ],
+                  // Bagian Lain (jika ada)
+                  // const Text(
+                  //   'Lainnya',
+                  //   style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold, color: Colors.black87),
+                  // ),
+                  // const SizedBox(height: 8),
+                  // Card(
+                  //   margin: const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
+                  //   shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(10)),
+                  //   child: Padding(
+                  //     padding: const EdgeInsets.all(16.0),
+                  //     child: Column(
+                  //       crossAxisAlignment: CrossAxisAlignment.start,
+                  //       children: [
+                  //         Text('Alamat', style: TextStyle(fontWeight: FontWeight.bold, color: Colors.grey[700])),
+                  //         const SizedBox(height: 4),
+                  //         Text(userData['address'] ?? 'Tidak ada alamat'),
+                  //         Align(
+                  //           alignment: Alignment.centerRight,
+                  //           child: IconButton(icon: const Icon(Icons.edit), onPressed: () => editField('address')),
+                  //         ),
+                  //       ],
+                  //     ),
+                  //   ),
+                  // ),
+                  // Tambahkan card atau expansion tile lain untuk informasi tambahan
+                  const SizedBox(height: 32),
+                  ElevatedButton(
+                    onPressed: () {
+                      // Tambahkan logika logout atau aksi lain di sini
+                      FirebaseAuth.instance.signOut();
+                      Navigator.pushReplacementNamed(
+                        context,
+                        '/login',
+                      ); // Contoh navigasi logout
+                    },
+                    style: ElevatedButton.styleFrom(
+                      backgroundColor: Colors.redAccent,
+                      padding: const EdgeInsets.symmetric(
+                        horizontal: 40,
+                        vertical: 12,
+                      ),
+                      shape: RoundedRectangleBorder(
+                        borderRadius: BorderRadius.circular(10),
+                      ),
+                    ),
+                    child: const Text(
+                      'Logout',
+                      style: TextStyle(fontSize: 18, color: Colors.white),
+                    ),
+                  ),
+                ],
+              ),
             );
           } else if (snapshot.hasError) {
-            return Center(child: Text('Error${snapshot.error}'));
+            return Center(child: Text('Error: ${snapshot.error}'));
           }
           return const Center(child: CircularProgressIndicator());
         },

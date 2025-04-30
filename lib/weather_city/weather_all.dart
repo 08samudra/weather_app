@@ -68,6 +68,7 @@ class _WeatherDetailScreenState extends State<WeatherDetailScreen> {
         return "assets/images/drizzle.png";
       case 'snow':
         return "assets/images/snow.png";
+
       default:
         return "assets/images/cloudy.png";
     }
@@ -110,7 +111,7 @@ class _WeatherDetailScreenState extends State<WeatherDetailScreen> {
       backgroundColor: const Color(0xff778da9),
       appBar: AppBar(
         title: Text('Weather in ${widget.cityName}'),
-        backgroundColor: const Color(0xff778da9),
+        backgroundColor: const Color.fromARGB(255, 255, 255, 255),
       ),
       body: RefreshIndicator(
         onRefresh: () async {
@@ -119,7 +120,7 @@ class _WeatherDetailScreenState extends State<WeatherDetailScreen> {
         },
         child: SingleChildScrollView(
           physics: const AlwaysScrollableScrollPhysics(),
-          padding: const EdgeInsets.fromLTRB(15, 55, 15, 30),
+          padding: const EdgeInsets.fromLTRB(15, 45, 15, 10),
           child: Center(
             child:
                 _isLoading
@@ -158,7 +159,7 @@ class _WeatherDetailScreenState extends State<WeatherDetailScreen> {
                               fontWeight: FontWeight.bold,
                             ),
                           ),
-                        const SizedBox(height: 30),
+                        const SizedBox(height: 10),
                         Text(
                           formattedDate,
                           style: const TextStyle(
@@ -175,7 +176,7 @@ class _WeatherDetailScreenState extends State<WeatherDetailScreen> {
                             fontWeight: FontWeight.bold,
                           ),
                         ),
-                        const SizedBox(height: 30),
+                        const SizedBox(height: 5),
                         Container(
                           height: 200,
                           width: 200,

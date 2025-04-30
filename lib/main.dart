@@ -30,7 +30,7 @@ class MyApp extends StatelessWidget {
       routes: {
         '/splash': (context) => const SplashLogoApp1(),
         '/login': (context) => const LoginScreenFirebase(),
-        '/home': (context) => const HomeScreenFirebase(),
+        '/home': (context) => HomeScreenFirebase(),
       },
     );
   }
