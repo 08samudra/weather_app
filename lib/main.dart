@@ -1,6 +1,5 @@
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
-// import 'package:flutter_clone2/splash_screen/splash_app1.dart';
 import 'package:flutter_clone2/firebase_login/auth/login_screen.dart';
 import 'package:flutter_clone2/home_screen/homescreen.dart';
 import 'package:flutter_clone2/splash_screen/splash_app1.dart';
@@ -13,9 +12,14 @@ Future<void> main() async {
   runApp(const MyApp());
 }
 
-class MyApp extends StatelessWidget {
+class MyApp extends StatefulWidget {
   const MyApp({super.key});
 
+  @override
+  State<MyApp> createState() => _MyAppState();
+}
+
+class _MyAppState extends State<MyApp> {
   // This widget is the root of your application.
   @override
   Widget build(BuildContext context) {

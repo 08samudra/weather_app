@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_clone2/api_service/api_weather_services.dart';
 import 'package:flutter_clone2/api_service/weather_data.dart';
-// import 'package:flutter_clone2/app_1/api_service/weather_services.dart';
 import 'package:intl/intl.dart';
 
 class WeatherDetailScreen extends StatefulWidget {
@@ -120,12 +119,10 @@ class _WeatherDetailScreenState extends State<WeatherDetailScreen> {
         },
         child: SingleChildScrollView(
           physics: const AlwaysScrollableScrollPhysics(),
-          padding: const EdgeInsets.fromLTRB(15, 45, 15, 10),
+          padding: const EdgeInsets.fromLTRB(15, 25, 15, 10),
           child: Center(
             child:
-                _isLoading
-                    ? const CircularProgressIndicator(color: Colors.white)
-                    : _errorMessage.isNotEmpty
+                _errorMessage.isNotEmpty
                     ? Text(
                       'Error: $_errorMessage',
                       style: const TextStyle(color: Colors.white),
@@ -187,10 +184,9 @@ class _WeatherDetailScreenState extends State<WeatherDetailScreen> {
                           ),
                         ),
                         const SizedBox(height: 30),
-                        Container(
-                          height: 250,
-                          decoration: BoxDecoration(
-                            color: const Color(0xff415a77),
+                        Card(
+                          color: const Color(0xff415a77),
+                          shape: RoundedRectangleBorder(
                             borderRadius: BorderRadius.circular(20),
                           ),
                           child: Padding(
@@ -211,7 +207,7 @@ class _WeatherDetailScreenState extends State<WeatherDetailScreen> {
                                       children: [
                                         const Icon(
                                           Icons.wind_power,
-                                          color: Colors.white,
+                                          color: Colors.amber,
                                         ),
                                         const SizedBox(height: 5),
                                         weatherInfoCard(
@@ -221,45 +217,6 @@ class _WeatherDetailScreenState extends State<WeatherDetailScreen> {
                                         ),
                                       ],
                                     ),
-                                    Column(
-                                      mainAxisAlignment:
-                                          MainAxisAlignment.center,
-                                      children: [
-                                        const Icon(
-                                          Icons.trending_up,
-                                          color: Colors.white,
-                                        ),
-                                        const SizedBox(height: 5),
-                                        weatherInfoCard(
-                                          title: "Max",
-                                          value:
-                                              "${_weatherData!.maxTemperature.toStringAsFixed(2)}°C",
-                                        ),
-                                      ],
-                                    ),
-                                    Column(
-                                      mainAxisAlignment:
-                                          MainAxisAlignment.center,
-                                      children: [
-                                        const Icon(
-                                          Icons.trending_down,
-                                          color: Colors.white,
-                                        ),
-                                        const SizedBox(height: 5),
-                                        weatherInfoCard(
-                                          title: "Min",
-                                          value:
-                                              "${_weatherData!.minTemperature.toStringAsFixed(2)}°C",
-                                        ),
-                                      ],
-                                    ),
-                                  ],
-                                ),
-                                const Divider(color: Colors.white30),
-                                Row(
-                                  mainAxisAlignment:
-                                      MainAxisAlignment.spaceBetween,
-                                  children: [
                                     Column(
                                       mainAxisAlignment:
                                           MainAxisAlignment.center,
@@ -290,18 +247,42 @@ class _WeatherDetailScreenState extends State<WeatherDetailScreen> {
                                         ),
                                       ],
                                     ),
+                                  ],
+                                ),
+                                const Divider(color: Colors.white30),
+                                Row(
+                                  mainAxisAlignment:
+                                      MainAxisAlignment.spaceEvenly,
+                                  children: [
                                     Column(
                                       mainAxisAlignment:
                                           MainAxisAlignment.center,
                                       children: [
                                         const Icon(
-                                          Icons.leaderboard,
+                                          Icons.trending_up,
                                           color: Colors.amber,
                                         ),
                                         const SizedBox(height: 5),
                                         weatherInfoCard(
-                                          title: "Sea-Level",
-                                          value: "${_weatherData!.seaLavel}m",
+                                          title: "Max",
+                                          value:
+                                              "${_weatherData!.maxTemperature.toStringAsFixed(2)}°C",
+                                        ),
+                                      ],
+                                    ),
+                                    Column(
+                                      mainAxisAlignment:
+                                          MainAxisAlignment.center,
+                                      children: [
+                                        const Icon(
+                                          Icons.trending_down,
+                                          color: Colors.amber,
+                                        ),
+                                        const SizedBox(height: 5),
+                                        weatherInfoCard(
+                                          title: "Min",
+                                          value:
+                                              "${_weatherData!.minTemperature.toStringAsFixed(2)}°C",
                                         ),
                                       ],
                                     ),
@@ -313,9 +294,11 @@ class _WeatherDetailScreenState extends State<WeatherDetailScreen> {
                         ),
                       ],
                     )
-                    : const Text(
-                      'No weather data available.',
-                      style: TextStyle(color: Colors.white),
+                    : const Center(
+                      child: Text(
+                        'Loading...',
+                        style: TextStyle(color: Colors.white),
+                      ),
                     ),
           ),
         ),
